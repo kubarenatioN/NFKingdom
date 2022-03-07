@@ -1,0 +1,13 @@
+.galery {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+}
+
+.item__card {
+	max-width: 30%;
+	width: 100%;
+	margin-bottom: 20px;
+	padding: 10px;
+	border: 1px solid #333;
+}

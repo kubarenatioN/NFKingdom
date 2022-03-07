@@ -7,6 +7,7 @@
 .collection__item {
 	display: block;
 	max-width: 30%;
+	width: 100%;
 	padding: 20px;
 	border: 1px solid #333;
 	margin-bottom: 20px;

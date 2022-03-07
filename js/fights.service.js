@@ -16,8 +16,9 @@ const collectLoot = (id, e) => {
 	}
 	ajax.collectLoot(req)
 		.then(response => response.json())
-		.then(({newFighter}) => {
+		.then(({newFighter, loot}) => {
 			updateFighter(newFighter)
+			// updateUserAccount(loot)
 		})
 }
 

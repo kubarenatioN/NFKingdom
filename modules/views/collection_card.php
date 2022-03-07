@@ -12,7 +12,7 @@
 		$html .=
 			"<a 
 				class='collection__item'
-				href='/pages/collection.php?c=$id'>
+				href='/pages/galery.php?c=$id'>
 				$name
 			</a>";
 	}

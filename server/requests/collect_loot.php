@@ -4,7 +4,7 @@
 	$body = json_decode($json, true);
 	$warrior_id = $body['warriorId'];
 
-	$newFighter = collect_loot($warrior_id);
+	$res = collect_loot($warrior_id);
 
-	echo json_encode(["newFighter" => $newFighter]);
+	echo json_encode($res);
 ?>

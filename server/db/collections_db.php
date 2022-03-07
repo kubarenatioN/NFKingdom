@@ -13,4 +13,45 @@
 		return $data;
 	}
 
+	function get_collection($id) {
+		$q = "select * from collections where id = $id";
+		$c = connect();
+
+		$collection = $c->query($q)->fetch_assoc();
+		
+		disconnect($c);
+
+		return $collection;
+	}
+
+	function get_collection_items($id) {
+		$q = "select type from collections where id = $id";
+		$c = connect();
+	
+		$type = $c->query($q)->fetch_assoc()['type'];
+	
+		$qItems = "select * from $type where collection_id = $id";
+
+		$items = $c->query($qItems)->fetch_all(MYSQLI_ASSOC);
+		
+		disconnect($c);
+
+		return $items;
+	}
+
+	function get_item($colId, $itemId) {
+		$q = "select type from collections where id = $colId";
+		$c = connect();
+	
+		$type = $c->query($q)->fetch_assoc()['type'];
+	
+		$qItem = "select * from $type where collection_id = $colId and id = $itemId";
+
+		$item = $c->query($qItem)->fetch_assoc();
+		
+		disconnect($c);
+
+		return $item;
+	}
+
 ?>

@@ -73,19 +73,21 @@
 	}
 
 	function collect_loot($warrior_id) {	
+		$qCollectLoot = "select loot from fights where id_warrior = $warrior_id and isCollected = 0";
 		$qCollectFight = "update fights set isCollected = 1 where id_warrior = $warrior_id and isCollected = 0";
 		$qRefreshFighter = "update warriors set isInFight = 0, hasLoot = 0 where id = $warrior_id";
 		$qGetRefreshedWarrior = "select * from warriors where id = $warrior_id";
 
 		$c = connect();
 
+		$loot = $c->query($qCollectLoot)->fetch_assoc()['loot'];
 		$c->query($qCollectFight);
 		$c->query($qRefreshFighter);
 		$newFighter = $c->query($qGetRefreshedWarrior)->fetch_assoc();
 
 		disconnect($c);
 
-		return $newFighter;
+		return ["newFighter" => $newFighter, "loot" => $loot];
 	}
 
 	function finish_fight($warrior_id) {

@@ -1,20 +1,7 @@
 'use strict'
 const ajax = {
-	sendRequest: (id) => {
-		const body = {
-			'some-data': 'hello',
-		}
-		return fetch('requests/start_fight.php', {
-			method: 'POST',
-			body,
-			headers: {
-				'Content-Type': 'application/json',
-			}
-		})
-	},
-
 	getAllFighters: () => {
-		const url = 'server/requests/get_all_fighters.php'
+		const url = '/server/requests/get_all_fighters.php'
 		return fetch(url, {
 			method: 'POST',
 			headers: {
@@ -23,8 +10,22 @@ const ajax = {
 		})
 	},
 
+	getUserFighters: (userId) => {
+		const url = '/server/requests/get_user_fighters.php'
+		const payload = {
+			userId,
+		}
+		return fetch(url, {
+			method: 'POST',
+			body: JSON.stringify(payload),
+			headers: {
+				'Content-Type': 'application/json',
+			}
+		})
+	},
+
 	startFight: (params) => {
-		const url = 'server/requests/start_fight.php'
+		const url = '/server/requests/start_fight.php'
 		const data = {
 			...params,
 		}
@@ -38,7 +39,7 @@ const ajax = {
 	},
 
 	collectLoot: (params) => {
-		const url = 'server/requests/collect_loot.php'
+		const url = '/server/requests/collect_loot.php'
 		const data = {
 			...params,
 		}
@@ -52,7 +53,7 @@ const ajax = {
 	},
 
 	updateFighterView: (newFighter) => {
-		const url = 'modules/views/update_fighter_view.php'
+		const url = '/modules/views/update_fighter_view.php'
 		const data = {
 			newFighter,
 		}
@@ -66,7 +67,7 @@ const ajax = {
 	},
 
 	finishFight: (params) => {
-		const url = 'server/requests/finish_fight.php'
+		const url = '/server/requests/finish_fight.php'
 		const data = {
 			...params,
 		}
@@ -80,7 +81,7 @@ const ajax = {
 	},
 
 	getFightersHTML: (fighters) => {
-		const url = 'modules/views/fighter_card.php'
+		const url = '/modules/views/fighter_card.php'
 		const payload = {
 			fighters,
 		} 
@@ -94,7 +95,7 @@ const ajax = {
 	},
 
 	getAllWarriorsFights: () => {
-		const url = 'server/requests/warriors_fights.php'
+		const url = '/server/requests/warriors_fights.php'
 		return fetch(url, {
 			method: 'POST',
 			headers: {

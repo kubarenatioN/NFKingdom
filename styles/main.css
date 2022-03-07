@@ -1,0 +1,25 @@
+*, *::before, *::after {
+	box-sizing: border-box;
+}
+
+body {
+	margin: 0;
+	font-family: sans-serif;
+}
+
+a {
+	text-decoration: none;
+	color: inherit;
+}
+
+ul {
+	padding: 0;
+	margin: 0;
+}
+
+.fighter__countdown {
+	display: none;
+}
+.fighter__countdown.show {
+	display: block;
+}

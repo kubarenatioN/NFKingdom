@@ -6,10 +6,9 @@ const getUser = (id) => {
 		.then(({ user }) => user)
 }
 
-const updateUserAccount = (loot) => {
-	const userId = localStorage.getItem(userIdKey)
+const updateUserAccount = (userId, value) => {
 	if (userId === null) return
-	return usersAjax.addToAccount(userId, loot)
+	return usersAjax.addToAccount(userId, value)
 		.then(res => res.json())
 		.then(({ user }) => user)
 }
@@ -18,4 +17,10 @@ const displayUserProfile = (user) => {
 	return usersAjax.getUserProfileHTML(user)
 		.then(res => res.json())
 		.then(({ html }) => html)
+}
+
+const purchaseToken = (payload) => {
+	return usersAjax.purchaseToken(payload)
+		.then(res => res.json())
+		.then(data => data)
 }

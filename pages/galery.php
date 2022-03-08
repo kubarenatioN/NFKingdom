@@ -16,19 +16,24 @@
 	<script>
 		const galery = document.querySelector('#galery')
 		const galeryHeader = document.querySelector('#galery-header')
-
+		let galeryItems
 		const loadColItems = (id) => {
 			loadCollectionItems(id)
 				.then(({ items, collection }) => {
+					galeryItems = items
 					galeryHeader.innerHTML = `Gallery "${collection.name}"`
 					return displayCollectionItems(items, collection)
 				})
-				.then(html => galery.innerHTML = html)
+				.then(html => {
+					galery.innerHTML = html
+					console.log('items:', galeryItems);
+				})
 		}
 
 		const loadQueryItems = (q) => {
 			galery.innerHTML = q
 		}
+		
 	</script>
 
 	<?

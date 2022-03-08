@@ -41,4 +41,15 @@ const usersAjax = {
 			}
 		})
 	},
+
+	purchaseToken: (payload) => {
+		const url = '/server/requests/purchase_token.php'
+		return fetch(url, {
+			method: 'POST',
+			body: JSON.stringify(payload),
+			headers: {
+				'Content-Type': 'application/json',
+			}
+		})
+	}
 }

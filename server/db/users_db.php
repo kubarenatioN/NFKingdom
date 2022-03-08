@@ -32,4 +32,16 @@
 		return $user;
 	}
 
+	function purchase_item($user_id, $token_id, $token_type) {
+		$q = "insert into users_items (id, user_id, item_id, item_type) values (null, $user_id, $token_id, '$token_type')";
+
+		$c = connect();
+	
+		$data = $c->query($q);
+		
+		disconnect($c);
+
+		return $data;
+	}
+
 ?>

@@ -18,7 +18,7 @@ const collectLoot = (id, e) => {
 		.then(response => response.json())
 		.then(({newFighter, loot}) => {
 			updateFighter(newFighter)
-			return updateUserAccount(loot)
+			return updateUserAccount(userId, loot)
 			// TODO: update user view!!!
 		})
 		.then((user) => {

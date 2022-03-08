@@ -14,12 +14,36 @@
 		const token = document.querySelector('#token')
 		const tokenHeader = document.querySelector('#token-header')
 
+		const buyToken = (token, tokenType) => {
+			const userId = localStorage.getItem(CONST.userKey)
+			const requests = []
+			const purchase = purchaseToken({ userId, tokenId: token.id, tokenType })
+			const account = updateUserAccount(userId, -token.price)
+			requests.push(purchase, account)
+			Promise.all(requests)
+				.then(([ isPurchased, user ]) => {
+					// console.log(isPurchased, user);
+					return displayUserProfile(user)
+				})
+				.then(html => profile.innerHTML = html)
+		}
+
 		const loadToken = (c, item) => {
+			let tokenItem
+			let collectionType
 			loadItem(c, item)
 				.then(({ item, collection }) => {
+					tokenItem = item
+					collectionType = collection.type
 					return getItemHTML(collection, item)
 				})
-				.then(html => token.innerHTML = html)
+				.then(html => {
+					token.innerHTML = html
+					const buyBtn = document.querySelector('.token__purchase')
+					buyBtn.addEventListener('click', () => {
+						buyToken(tokenItem, collectionType)
+					})
+				})
 		}
 
 		const loadQueryItems = (q) => {

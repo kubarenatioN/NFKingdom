@@ -14,7 +14,6 @@ const loadItem = (colId, itemId) => {
 	return collectionsAjax.getItem(colId, itemId)
 		.then(res => res.json())
 		.then(({ item, collection }) => {
-			console.log(item, collection);
 			return { item, collection }
 		})
 }

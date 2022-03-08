@@ -17,6 +17,7 @@
 			<p>rarity: $rarity</p>
 			<p>collection: $col_name</p>
 			<p>price: $price$</p>
+			<button class='token__purchase'>Purchase</button>
 		</div>";
 
 	echo json_encode(["html" => $html]);

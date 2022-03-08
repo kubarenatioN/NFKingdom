@@ -1,12 +1,18 @@
 <? $title = "Camp" ?>
 <? require_once $_SERVER['DOCUMENT_ROOT'].'/modules/header/header.php' ?>
 
+    <h3>Fighters for user #<span id="user-id-holder"></span></h3>
+
     <div id="camp" class="container">
 
     </div>
 
 	<script src="/js/ajax.js"></script>
     <script src="/js/fights.service.js"></script>
+
+    <!-- declared in header connection -->
+    <!-- <script src="/js/users.ajax.js"></script>
+    <script src="/js/users.service.js"></script> -->
 
     <?
         require_once $_SERVER['DOCUMENT_ROOT'].'/server/db/fighters_db.php';
@@ -19,12 +25,14 @@
     ?>
 
 	<script>
-		const userIdKey = 'userId'
-
+        const userIdKey = CONST.userKey
 		if (!localStorage.getItem(userIdKey)) {
 			localStorage.setItem(userIdKey, 1)
 		}
 		const userId = localStorage.getItem(userIdKey);
+
+		const userIdHeader = document.querySelector('#user-id-holder')
+        userIdHeader.innerHTML = userId
 
 		const camp = document.querySelector('#camp')
         let warriors
@@ -42,7 +50,7 @@
                 return ajax.getAllWarriorsFights()
             })
             .then(res => res.json())
-            .then(warriors => warriors.forEach(w => setupCountdown(w))) 
+            .then(warriors => warriors.forEach(w => setupCountdown(w)))
     </script>
 
 <? require_once $_SERVER['DOCUMENT_ROOT'].'/modules/footer/footer.php' ?>

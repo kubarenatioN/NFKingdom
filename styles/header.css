@@ -9,3 +9,22 @@
 	justify-content: space-between;
 	list-style: none;
 }
+
+.profile {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 10px;
+	background-color: #ddd;
+	border-radius: 50%;
+	min-width: 80px;
+	width: 80px;
+	height: 80px;
+}
+.profile__widget {
+	text-align: center;
+}
+.profile__widget-username,
+.profile__widget-account {
+	margin: 0;
+}

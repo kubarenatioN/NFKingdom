@@ -13,5 +13,16 @@
     <header class="header">
         <? require_once $_SERVER['DOCUMENT_ROOT'].'/modules/header/main_menu.php' ?>
 
-        <? require_once $_SERVER['DOCUMENT_ROOT'].'/modules/user/active_user.php' ?>
+        <div id="profile" class="profile">
+            
+        </div>
     </header>
+<script src="/js/constants.js"></script>
+<script src="/js/users.ajax.js"></script>
+<script src="/js/users.service.js"></script>
+<script>
+    const profile = document.querySelector('#profile')
+    getUser(CONST.userKey)
+        .then(user => displayUserProfile(user))
+        .then(html => profile.innerHTML = html)
+</script>

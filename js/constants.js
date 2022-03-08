@@ -1,0 +1,3 @@
+const CONST = {
+	userKey: 'userId'
+}

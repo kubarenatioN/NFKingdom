@@ -33,11 +33,26 @@
 	}
 
 	function purchase_item($user_id, $token_id, $token_type) {
-		$q = "insert into users_items (id, user_id, item_id, item_type) values (null, $user_id, $token_id, '$token_type')";
+		$q = "insert into users_items (id, user_id, item_id, item_type, item_unique_id) values (null, $user_id, $token_id, '$token_type', UUID())";
 
 		$c = connect();
 	
 		$data = $c->query($q);
+		
+		disconnect($c);
+
+		return $data;
+	}
+
+	function get_items($user_id) {
+		$q = "select * 
+		from users_items u
+		inner join creatures c
+		on u.item_id = c.id and u.user_id = $user_id";
+
+		$c = connect();
+	
+		$data = $c->query($q)->fetch_all(MYSQLI_ASSOC);
 		
 		disconnect($c);
 

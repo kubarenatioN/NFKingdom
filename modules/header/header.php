@@ -7,6 +7,7 @@
     <title><? echo $title?></title>
     <link rel="stylesheet" href="/styles/main.css">
     <link rel="stylesheet" href="/styles/header.css">
+    <link rel="stylesheet" href="/styles/footer.css">
     <? echo $links ?>
 </head>
 <body>

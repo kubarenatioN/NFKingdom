@@ -25,12 +25,12 @@
 	}
 
 	function get_collection_items($id) {
-		$q = "select type from collections where id = $id";
+		// $q = "select type from collections where id = $id";
 		$c = connect();
 	
-		$type = $c->query($q)->fetch_assoc()['type'];
+		// $type = $c->query($q)->fetch_assoc()['type'];
 	
-		$qItems = "select * from $type where collection_id = $id";
+		$qItems = "select * from items where collection_id = $id";
 
 		$items = $c->query($qItems)->fetch_all(MYSQLI_ASSOC);
 		
@@ -40,12 +40,12 @@
 	}
 
 	function get_item($colId, $itemId) {
-		$q = "select type from collections where id = $colId";
+		// $q = "select type from collections where id = $colId";
 		$c = connect();
 	
-		$type = $c->query($q)->fetch_assoc()['type'];
+		// $type = $c->query($q)->fetch_assoc()['type'];
 	
-		$qItem = "select * from $type where collection_id = $colId and id = $itemId";
+		$qItem = "select * from items where collection_id = $colId and id = $itemId";
 
 		$item = $c->query($qItem)->fetch_assoc();
 		

@@ -1,0 +1,11 @@
+.inventory {
+	display: flex;
+	justify-content: space-between;
+	flex-wrap: wrap;
+}
+.inventory__item {
+	width: 270px;
+	padding: 20px;
+	border: 1px solid #333;
+	margin-bottom: 40px;
+}

@@ -1,36 +1,29 @@
-<? $title = "Camp" ?>
+<?  
+    $title = "Camp";
+    $links = "<link rel='stylesheet' href='/styles/camp.css'>";
+?>
+
 <? require_once $_SERVER['DOCUMENT_ROOT'].'/modules/header/header.php' ?>
+
+
+    <script src="/js/ajax.js"></script>
+    <script src="/js/fights.service.js"></script>
 
     <h3>Fighters for user #<span id="user-id-holder"></span></h3>
 
     <div id="camp" class="container">
 
     </div>
-
-	<script src="/js/ajax.js"></script>
-    <script src="/js/fights.service.js"></script>
-
-    <!-- declared in header connection -->
-    <!-- <script src="/js/users.ajax.js"></script>
-    <script src="/js/users.service.js"></script> -->
-
-    <?
-        require_once $_SERVER['DOCUMENT_ROOT'].'/server/db/fighters_db.php';
-        echo "<br>";
-        $fights = get_all_warriors_fights();
-        while($row = $fights->fetch_assoc()) {
-            print_r($row);
-            echo "<br>";
-        }
-    ?>
-
-	<script>
+	
+    <script>
         const userIdKey = CONST.userKey
 		if (!localStorage.getItem(userIdKey)) {
 			localStorage.setItem(userIdKey, 1)
 		}
 		const userId = localStorage.getItem(userIdKey);
+    </script>
 
+	<script>
 		const userIdHeader = document.querySelector('#user-id-holder')
         userIdHeader.innerHTML = userId
 
@@ -51,6 +44,23 @@
             })
             .then(res => res.json())
             .then(warriors => warriors.forEach(w => setupCountdown(w)))
+    </script>
+
+    <h3>Inventory</h3>
+    
+    <div id="inventory" class="inventory">
+
+    </div>
+    
+    <script src="/js/items.ajax.js"></script>
+    <script src="/js/items.service.js"></script>
+
+    <script>
+        // get user inventory
+        const inventory = document.querySelector('#inventory')
+        getItems(userId)
+            .then(items => displayItems(items))
+            .then(html => inventory.innerHTML = html)
     </script>
 
 <? require_once $_SERVER['DOCUMENT_ROOT'].'/modules/footer/footer.php' ?>

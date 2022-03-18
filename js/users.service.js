@@ -24,3 +24,9 @@ const purchaseToken = (payload) => {
 		.then(res => res.json())
 		.then(data => data)
 }
+
+const getItems = (userId) => {
+	return usersAjax.getUserItems(userId)
+		.then(res => res.json())
+		.then(({ items }) => items)
+}

@@ -51,5 +51,19 @@ const usersAjax = {
 				'Content-Type': 'application/json',
 			}
 		})
-	}
+	},
+
+	getUserItems: (userId) => {
+		const url = '/server/requests/get_user_items.php'
+		const payload = {
+			userId,
+		}
+		return fetch(url, {
+			method: 'POST',
+			body: JSON.stringify(payload),
+			headers: {
+				'Content-Type': 'application/json',
+			}
+		})
+	},
 }

@@ -53,10 +53,11 @@ const usersAjax = {
 		})
 	},
 
-	getUserItems: (userId) => {
+	getUserItems: (userId, itemsType) => {
 		const url = '/server/requests/get_user_items.php'
 		const payload = {
 			userId,
+			itemsType,
 		}
 		return fetch(url, {
 			method: 'POST',

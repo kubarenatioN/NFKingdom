@@ -44,11 +44,11 @@
 		return $data;
 	}
 
-	function get_items($user_id) {
+	function get_items($user_id, $type) {
 		$q = "select * 
 		from users_items u
-		inner join creatures c
-		on u.item_id = c.id and u.user_id = $user_id";
+		inner join items i
+		on u.item_id = i.id and u.user_id = $user_id and item_type in ($type)";
 
 		$c = connect();
 	

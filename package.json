@@ -1,0 +1,23 @@
+{
+  "name": "php1",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kubarenatioN/NFKingdom.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kubarenatioN/NFKingdom/issues"
+  },
+  "homepage": "https://github.com/kubarenatioN/NFKingdom#readme",
+  "dependencies": {
+    "sortablejs": "^1.14.0"
+  }
+}

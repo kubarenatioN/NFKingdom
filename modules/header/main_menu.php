@@ -5,7 +5,7 @@
 		"Login" => "/pages/login.php",
 		"Camp" => "/pages/camp.php",
 		"Collections" => "/pages/collections.php",
-		"Catalog" => "/pages/catalog.php",
+		// "Catalog" => "/pages/catalog.php",
 	];
 
 	$header = "<ul class='header__menu'>";

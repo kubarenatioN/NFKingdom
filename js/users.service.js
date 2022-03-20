@@ -25,7 +25,13 @@ const purchaseToken = (payload) => {
 		.then(data => data)
 }
 
-const getItems = (userId) => {
+const getItems = (userId, type) => {
+	return usersAjax.getUserItems(userId, type)
+		.then(res => res.json())
+		.then(({ items }) => items)
+}
+
+const getCreatures = (userId) => {
 	return usersAjax.getUserItems(userId)
 		.then(res => res.json())
 		.then(({ items }) => items)

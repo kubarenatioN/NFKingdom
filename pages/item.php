@@ -1,4 +1,7 @@
-<? $title = "Token" ?>
+<? 
+	$title = "Token"; 
+	$links = "<link rel='stylesheet' href='/styles/token-page.css'>";
+?>
 <? require_once $_SERVER['DOCUMENT_ROOT'].'/modules/header/header.php' ?>
 
 	<script src="/js/collections.ajax.js"></script>
@@ -15,10 +18,10 @@
 		const tokenHeader = document.querySelector('#token-header')
 
 		const buyToken = (token, tokenType) => {
-			const userId = localStorage.getItem(CONST.userKey)
+			const id = userId
 			const requests = []
-			const purchase = purchaseToken({ userId, tokenId: token.id, tokenType })
-			const account = updateUserAccount(userId, -token.price)
+			const purchase = purchaseToken({ userId: id, tokenId: token.id, tokenType })
+			const account = updateUserAccount(id, -token.price)
 			requests.push(purchase, account)
 			Promise.all(requests)
 				.then(([ isPurchased, user ]) => {

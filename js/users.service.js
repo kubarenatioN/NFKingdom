@@ -1,13 +1,13 @@
 const getUser = (id) => {
-	const userId = localStorage.getItem(id)
-	if (userId === null) return "no user"
-	return usersAjax.getUser(userId)
+	// const userId = localStorage.getItem(id)
+	if (id === '') return Promise.reject("no user")
+	return usersAjax.getUser(id)
 		.then(res => res.json())
 		.then(({ user }) => user)
 }
 
 const updateUserAccount = (userId, value) => {
-	if (userId === null) return
+	if (userId === '') return
 	return usersAjax.addToAccount(userId, value)
 		.then(res => res.json())
 		.then(({ user }) => user)
@@ -35,4 +35,14 @@ const getCreatures = (userId) => {
 	return usersAjax.getUserItems(userId)
 		.then(res => res.json())
 		.then(({ items }) => items)
+}
+
+const createWarrior = (userId, name, items) => {
+	return usersAjax.createWarrior(userId, name, items)
+		.then(res => res.json())
+		.then(data => {
+			const newWarriorId = data['warrior_id']
+			// return getItems(userId, 'creatures')
+			return newWarriorId
+		})
 }

@@ -1,3 +1,6 @@
+<?
+    require_once $_SERVER['DOCUMENT_ROOT'].'/helpers/user_getter.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,7 +26,10 @@
 <script src="/js/users.service.js"></script>
 <script>
     const profile = document.querySelector('#profile')
-    getUser(CONST.userKey)
+    const userId = '<? echo get_user_id() ?>'
+    console.log('u id:',userId);
+    getUser(userId)
+        .catch(err => console.log(err))
         .then(user => displayUserProfile(user))
         .then(html => profile.innerHTML = html)
 </script>

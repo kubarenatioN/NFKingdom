@@ -67,4 +67,20 @@ const usersAjax = {
 			}
 		})
 	},
+
+	createWarrior: (userId, name, items) => {
+		const url = '/server/requests/create_user_warrior.php'
+		const payload = {
+			userId,
+			name,
+			items,
+		}
+		return fetch(url, {
+			method: 'POST',
+			body: JSON.stringify(payload),
+			headers: {
+				'Content-Type': 'application/json',
+			}
+		})
+	},
 }

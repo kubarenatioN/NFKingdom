@@ -1,17 +1,41 @@
+.fighters__list {
+	display: flex;
+	justify-content: space-between;
+	flex-wrap: wrap;
+}
+
+.fighter__card {
+	max-width: 180px;
+	padding: 20px;
+	border: 1px solid #333;
+	margin: 10px 5px;
+	min-height: 120px;
+}
+.fighter__img {
+	width: 100%;
+}
+
 .inventory {
 	width: 100%;
 	display: flex;
-	/* justify-content: space-between; */
+	justify-content: space-between;
 	flex-wrap: wrap;
+	height: 500px;
+	overflow-y: auto;
+	min-height: 200px;
+	background-color: #eee;
 }
 .inventory__item {
 	width: 200px;
 	height: 200px;
-	padding: 20px;
 	border: 1px solid #333;
 	margin-bottom: 40px;
 	background-color: #fff;
 	position: relative;
+}
+
+.inventory__item-img {
+	width: 100%;
 }
 
 .inventory__creatures::after,
@@ -47,27 +71,30 @@
 .camp {
 	display: flex;
 	flex-wrap: wrap;
+	justify-content: space-between;
+	padding-bottom: 100px;
 }
 
 .inventory__wrapper {
-	width: 100%;
+	order: 3;
+	width: 32%;
 }
 .creatures__wrapper {
-	width: 40%;
+	order: 1;
+	width: 32%;
 }
 
 .creatures {
 	display: flex;
 	justify-content: space-between;
 	flex-wrap: wrap;
-}
-.creatures .inventory__item {
-	width: 200px;
-	height: 200px;
+	height: 500px;
+	overflow-y: auto;
 }
 
 .creation__wrapper {
-	width: 60%;
+	width: 32%;
+	order: 2;
 }
 
 .creation {
@@ -76,21 +103,28 @@
 	flex-wrap: wrap;
 }
 .creation .slot {
-	width: 200px;
-	height: 200px;
+	width: 240px;
+	height: 240px;
 	background-color: #eee;
 	margin: 10px;
 	overflow: hidden;
 }
-.creation .inventory__item {
-	width: 200px;
-	height: 200px;
+
+.creation .slot .inventory__item {
+	width: 100%;
+	height: 100%;
 }
+
 .slot1__wrapper {
 	width: 100%;
 }
 .slot.slot1 {
 	margin: 10px auto;
+}
+.creation .slot2,
+.creation .slot3 {
+	width: 180px;
+	height: 180px;
 }
 
 .creation__btn {

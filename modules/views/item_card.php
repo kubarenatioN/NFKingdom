@@ -10,12 +10,17 @@
 		$id = $item['id'];
 		$rarity = $item['rarity'];
 		$price = $item['price'];
+		$img_url = $item['image_url'];
 		$col_id = $collection['id'];
 		$col_name = $collection['name'];
 		$html .=
 			"<a 
 				class='item__card'
 				href='/pages/item.php?c=$col_id&i=$id'>
+				<img 
+					class='item__card-img'
+					src='$img_url' 
+					alt='$col_name-$id'/>
 				<p>rarity: $rarity</p>
 				<p>collection: $col_name</p>
 				<p>price: $price$</p>

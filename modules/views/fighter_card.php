@@ -9,6 +9,7 @@
 		$name = $fighter['name'];
 		$duration = $fighter['duration'];
 		$id = $fighter['id'];
+		$img_url = $fighter['image_url'];
 		$isInFight = intval($fighter['isInFight']);
 		$hasLoot = intval($fighter['hasLoot']);
 		
@@ -17,16 +18,15 @@
 		$canCollect = $hasLoot ? '' : 'hidden';
 
 		$html .=
-			"<form 
+			"<div 
 				class='fighter__card'
 				id='w-$id'>
-				<input type='text' hidden name='fight_id' value=''>
+				<img class='fighter__img' src='$img_url' />
 				<div class='fighter__name'>$name</div>
 				<button 
 					$canFight
-					class='fighter__btn' 
-					type='button'
-					onclick='startFight($id, event)'>
+					class='fighter__btn start-fight__btn' 
+					type='button'>
 					Fight! ($duration sec)	
 				</button>
 				<button 
@@ -37,7 +37,7 @@
 					Collect loot	
 				</button>
 				<span class='fighter__countdown $showCountdown'>in fight countdown</span>
-			</form>";
+			</div>";
 	}
 
 	echo json_encode(["html" => $html]);

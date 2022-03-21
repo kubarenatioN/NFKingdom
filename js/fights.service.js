@@ -2,7 +2,7 @@ const startFight = (id, e) => {
 	const req = {
 		id,
 	}
-	ajax.startFight(req)
+	return ajax.startFight(req)
 		.then(response => response.json())
 		.then(({warrior, countdown}) => {
 			return Promise.all([countdown, updateFighter(warrior)])
@@ -46,7 +46,7 @@ const updateFighter = (newFighter) => {
 		.then(response => response.json())
 		.then(({html}) => {
 			const node = document.querySelector(`#w-${id}`)
-			node.innerHTML = html
+			node.outerHTML = html
 		})
 }
 
@@ -64,13 +64,16 @@ const setupCountdown = (fighter) => {
 	}
 
 	let duration = end_time - now
-	node.innerHTML = duration
+	node.innerHTML = `remain: ${duration} sec.`
 	const intervalId = setInterval(() => {
+		console.log('interval:', intervalId);
 		if (duration <= 1) {
 			clearInterval(intervalId)
 			finishFight(warrior_id)
 			return
 		}
-		node.innerHTML = --duration
+		node.innerHTML = node.innerHTML = `remain: ${--duration} sec.`
 	}, 1000)
+
+	return intervalId
 }

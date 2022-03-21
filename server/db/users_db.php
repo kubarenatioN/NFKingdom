@@ -1,6 +1,7 @@
 <?
 
 	require_once $_SERVER['DOCUMENT_ROOT'].'/server/db/connection.php';
+	require_once $_SERVER['DOCUMENT_ROOT'].'/helpers/fighter_calculator.php';
 
 	function get_user($id) {
 		$q = "select * from users where id = $id";
@@ -57,6 +58,40 @@
 		disconnect($c);
 
 		return $data;
+	}
+
+	function create_warrior($user_id, $name, $items) {
+		$params = calculate_fighter($items);
+		$prod = $params['prod'];
+		$dur = $params['dur'];
+		$creature_id = $items[0]['item_id'];
+		$slot2_id = $items[1]['item_id'];
+		$slot3_id = $items[2]['item_id'];
+
+		$rarity = 0;
+		foreach ($items as $k => $it) {
+			$rarity += $it['rarity'];
+		}
+		$rarity /= 3;
+		$img_url = $items[0]['image_url'] ?? '';
+
+		$creature_u_id = $items[0]['item_unique_id'];
+		$slot2_u_id = $items[1]['item_unique_id'];
+		$slot3_u_id = $items[2]['item_unique_id'];
+
+		$qCreate = "insert into warriors (user_id, name, production, duration, rarity, image_url, creature_slot_id, slot2_id, slot3_id)
+		values ($user_id, '$name', $prod, $dur, $rarity, '$img_url', $creature_id, $slot2_id, $slot3_id)";
+		$qGetWarrior = "select LAST_INSERT_ID()";
+		$qDeleteItems = "delete from users_items where item_unique_id in ('$creature_u_id', '$slot2_u_id', '$slot3_u_id')";
+
+		$c = connect();
+		$create = $c->query($qCreate);
+		$warrior_id = $c->query($qGetWarrior)->fetch_assoc()['LAST_INSERT_ID()'];
+		// $del = $c->query($qDeleteItems);
+
+		disconnect($c);
+
+		return ["created" => $create, "warrior_id" => $warrior_id];
 	}
 
 ?>

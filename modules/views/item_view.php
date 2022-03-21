@@ -7,6 +7,7 @@
 	$id = $item['id'];
 	$rarity = $item['rarity'];
 	$price = $item['price'];
+	$url = $item['image_url'];
 	$col_id = $col['id'];
 	$col_name = $col['name'];
 
@@ -14,6 +15,7 @@
 		"<div 
 			class='token__inner'>
 			<h3>Token #$id</h3>
+			<img src='$url' alt='$col_name-$id' />
 			<p>rarity: $rarity</p>
 			<p>collection: $col_name</p>
 			<p>price: $price$</p>

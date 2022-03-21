@@ -10,6 +10,7 @@
 		$item_id = $item['item_id'];
 		$rarity = $item['rarity'];
 		$price = $item['price'];
+		$img_url = $item['image_url'];
 		$type = $item['item_type'];
 		$token = $item['item_unique_id'];
 		
@@ -18,10 +19,13 @@
 				class='inventory__item inventory__$type'
 				data-id='$type[0]-$item_id'
 				data-token='$token'>
+				<img 
+					class='inventory__item-img'
+					src='$img_url' />
 				<h4>item: #$item_id</h4>
-				<p>rarity: $rarity</p>
-				<p>price: $price$</p>
-				<p>type: $type</p>
+				<span>rarity: $rarity</span>
+				<span>price: $price$</span>
+				<span>type: $type</span>
 			</div>";
 		// $i++;
 	}

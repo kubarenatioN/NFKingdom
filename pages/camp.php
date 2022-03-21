@@ -5,23 +5,23 @@
 
 <? require_once $_SERVER['DOCUMENT_ROOT'].'/modules/header/header.php' ?>
 
+    <?
+        $id = get_user_id();
+        header("User-id: $id");
+        var_dump($id);
+        if ($id == '') {
+            header("Location: login.php");
+        }
+    ?>
 
     <script src="/js/ajax.js"></script>
     <script src="/js/fights.service.js"></script>
 
     <h3>Fighters for user #<span id="user-id-holder"></span></h3>
 
-    <div id="fighters" class="container">
+    <div id="fighters" class="fighters__list">
 
     </div>
-	
-    <script>
-        const userIdKey = CONST.userKey
-		if (!localStorage.getItem(userIdKey)) {
-			localStorage.setItem(userIdKey, 1)
-		}
-		const userId = localStorage.getItem(userIdKey);
-    </script>
 
 	<script>
 		const userIdHeader = document.querySelector('#user-id-holder')
@@ -29,21 +29,41 @@
 
 		const camp = document.querySelector('#fighters')
         let warriors
-        ajax.getUserFighters(userId)
-            .then(response => response.json())
-            .then(({fighters}) => {
-                warriors = fighters
-                return ajax.getFightersHTML(fighters)
-            })
-            .then(fighters => fighters.json())
-            .then(fighters => {
-                camp.innerHTML = fighters.html
-            })
-            .then(() => {
-                return ajax.getAllWarriorsFights()
-            })
-            .then(res => res.json())
-            .then(warriors => warriors.forEach(w => setupCountdown(w)))
+        let intervals = []
+        function loadFighters(userId) {
+            console.log(intervals);
+            // intervals.forEach(i => clearInterval(i))
+            // intervals = []
+            ajax.getUserFighters(userId)
+                .then(response => response.json())
+                .then(({fighters}) => {
+                    warriors = fighters
+                    return ajax.getFightersHTML(fighters)
+                })
+                .then(fighters => fighters.json())
+                .then(fighters => {
+                    camp.innerHTML = fighters.html
+                    const fightButtons = camp.querySelectorAll('.fighter__card .start-fight__btn')
+                    console.log(fightButtons);
+                    fightButtons.forEach((b, i) => {
+                        b.addEventListener('click', () => {
+                            console.log(warriors[i].id);
+                            startFight(warriors[i].id)
+                        })
+                    })
+                })
+                .then(() => {
+                    return ajax.getAllWarriorsFights()
+                })
+                .then(res => res.json())
+                .then(warriors => warriors.forEach(w => {
+                    intervals.push(setupCountdown(w))
+                }))
+                .then(() => {
+                    console.log('after: ', intervals);
+                })
+        }
+        loadFighters(userId)
     </script>
 
     <h3>Camp</h3>
@@ -58,6 +78,7 @@
                 <div id="creation-slot-2" class="slot2 slot"></div>
                 <div id="creation-slot-3" class="slot3 slot"></div>
             </div>
+            <input id="warrior-name-input" type="text" placeholder="Имя"> 
             <button class="creation__btn" disabled>Create</button>
         </div>
 
@@ -82,7 +103,7 @@
     <script>
         let inventoryItems
         let creatureItems
-        
+
         // get user inventory
         const inventory = document.querySelector('#inventory')
         getItems(userId, "'weapons', 'defense'")
@@ -119,11 +140,50 @@
         const inventoryItemsSortable = new Sortable(inventory, sortableOptionsInventory)
 
         const createBtn = document.querySelector('.creation__btn')
-        addEventListener('onSlot', (e) => {
-            createBtn.disabled = e.detail.arr.filter(el => el).length !== 3
+        const warriorName = document.querySelector('#warrior-name-input')
+
+        let isAllTokensSlotted = false
+        let isNameEntered = false
+
+        warriorName.addEventListener('input', (e) => {
+            isNameEntered = e.target.value.length > 1
+            updateCreateBtnState()
         })
+
+        addEventListener('onSlot', (e) => {
+            isAllTokensSlotted = e.detail.arr.filter(el => el).length === 3
+            updateCreateBtnState()
+        })
+
+        const updateCreateBtnState = () => {
+            createBtn.disabled = !(isAllTokensSlotted && isNameEntered)
+        }
+
+        const clearSlottedItems = (items) => {
+            return items.map(it => {
+                it.remove()
+                return null
+            })
+        }
+        
         createBtn.addEventListener('click', (e) => {
-            console.log(slotItems);
+            const name = warriorName.value
+            createBtn.disabled = true
+            warriorName.value = ''
+            warriorName.disabled = true
+            isAllTokensSlotted = false
+            isNameEntered = false
+            const tokens = slotItems.map(el => el.dataset.token)
+            const items = creatureItems
+                .concat(inventoryItems)
+                .filter(it => tokens.includes(it.item_unique_id))
+            slotItems = clearSlottedItems(slotItems)
+            createWarrior(userId, name, items)
+                .then(() => {
+                    console.log('then...');
+                    loadFighters(userId)
+                })
+            warriorName.disabled = false
         })
     </script>
 

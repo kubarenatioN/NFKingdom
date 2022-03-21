@@ -1,4 +1,4 @@
-const slotItems = []
+let slotItems = []
 const ev = new CustomEvent('onSlot', {
 	detail: { }
 })

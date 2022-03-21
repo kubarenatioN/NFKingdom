@@ -29,11 +29,8 @@
 
 		const camp = document.querySelector('#fighters')
         let warriors
-        let intervals = []
         function loadFighters(userId) {
-            console.log(intervals);
-            // intervals.forEach(i => clearInterval(i))
-            // intervals = []
+            intervals = clearIntervals(intervals)
             ajax.getUserFighters(userId)
                 .then(response => response.json())
                 .then(({fighters}) => {
@@ -44,10 +41,8 @@
                 .then(fighters => {
                     camp.innerHTML = fighters.html
                     const fightButtons = camp.querySelectorAll('.fighter__card .start-fight__btn')
-                    console.log(fightButtons);
                     fightButtons.forEach((b, i) => {
                         b.addEventListener('click', () => {
-                            console.log(warriors[i].id);
                             startFight(warriors[i].id)
                         })
                     })
@@ -57,11 +52,11 @@
                 })
                 .then(res => res.json())
                 .then(warriors => warriors.forEach(w => {
-                    intervals.push(setupCountdown(w))
+                    setupCountdown(w)
                 }))
-                .then(() => {
-                    console.log('after: ', intervals);
-                })
+                // .then(() => {
+                //     console.log(intervals)
+                // })
         }
         loadFighters(userId)
     </script>

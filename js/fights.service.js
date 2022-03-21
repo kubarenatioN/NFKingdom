@@ -1,4 +1,11 @@
-const startFight = (id, e) => {
+let intervals = []
+
+const clearIntervals = (intervals) => {
+	intervals.forEach(i => clearInterval(i))
+	return []
+}
+
+const startFight = (id) => {
 	const req = {
 		id,
 	}
@@ -19,7 +26,6 @@ const collectLoot = (id, e) => {
 		.then(({newFighter, loot}) => {
 			updateFighter(newFighter)
 			return updateUserAccount(userId, loot)
-			// TODO: update user view!!!
 		})
 		.then((user) => {
 			return displayUserProfile(user)
@@ -47,11 +53,15 @@ const updateFighter = (newFighter) => {
 		.then(({html}) => {
 			const node = document.querySelector(`#w-${id}`)
 			node.outerHTML = html
+			const btn = document.querySelector(`#w-${id} .start-fight__btn`)
+			btn.addEventListener('click', () => {
+				startFight(id)
+			})
 		})
 }
 
 const setupCountdown = (fighter) => {
-	const {end_time, start_time, warrior_id} = fighter
+	const {end_time, warrior_id} = fighter
 	if (!end_time) return
 	
 	const now = Math.floor(Date.now() / 1000)
@@ -66,7 +76,6 @@ const setupCountdown = (fighter) => {
 	let duration = end_time - now
 	node.innerHTML = `remain: ${duration} sec.`
 	const intervalId = setInterval(() => {
-		console.log('interval:', intervalId);
 		if (duration <= 1) {
 			clearInterval(intervalId)
 			finishFight(warrior_id)
@@ -74,6 +83,8 @@ const setupCountdown = (fighter) => {
 		}
 		node.innerHTML = node.innerHTML = `remain: ${--duration} sec.`
 	}, 1000)
+
+	intervals.push(intervalId)
 
 	return intervalId
 }

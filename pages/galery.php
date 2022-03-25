@@ -7,11 +7,13 @@
 	<script src="/js/collections.ajax.js"></script>
     <script src="/js/collections.service.js"></script>
 
-	<h2 id="galery-header">Gallery</h2>
+	<section class="galery section">
+		<h2 id="galery-header" class="section-title">Gallery of </h2>
 
-	<div id="galery" class="galery">
+		<div id="galery" class="galery__inner">
 
-	</div>
+		</div>
+	</section>
 
 	<script>
 		const galery = document.querySelector('#galery')
@@ -21,7 +23,7 @@
 			loadCollectionItems(id)
 				.then(({ items, collection }) => {
 					galeryItems = items
-					galeryHeader.innerHTML = `Gallery "${collection.name}"`
+					galeryHeader.innerHTML = galeryHeader.textContent + `"${collection.name}"`
 					return displayCollectionItems(items, collection)
 				})
 				.then(html => {

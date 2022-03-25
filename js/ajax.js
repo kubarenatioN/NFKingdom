@@ -94,10 +94,14 @@ const ajax = {
 		})
 	},
 
-	getAllWarriorsFights: () => {
+	getAllWarriorsFights: (userId) => {
 		const url = '/server/requests/warriors_fights.php'
+		const payload = {
+			userId,
+		}
 		return fetch(url, {
 			method: 'POST',
+			body: JSON.stringify(payload),
 			headers: {
 				'Content-Type': 'application/json',
 			}

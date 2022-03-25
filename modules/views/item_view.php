@@ -12,14 +12,18 @@
 	$col_name = $col['name'];
 
 	$html =
-		"<div 
+	"
+		<img src='$url' alt='$col_name-$id' />
+		<div 
 			class='token__inner'>
-			<h3>Token #$id</h3>
-			<img src='$url' alt='$col_name-$id' />
+			<h2>Token #$id</h2>
 			<p>rarity: $rarity</p>
 			<p>collection: $col_name</p>
-			<p>price: $price$</p>
-			<button class='token__purchase'>Purchase</button>
+			<p class='token__inner-price'>price: $price</p>
+			<button class='token__purchase btn'>Purchase</button>
+			<div class='favorites__btns'>
+				
+			</div>
 		</div>";
 
 	echo json_encode(["html" => $html]);

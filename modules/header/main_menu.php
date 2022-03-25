@@ -2,7 +2,7 @@
 
 	$routes = [
 		"Home" => "/",
-		"Login" => "/pages/login.php",
+		// "Login" => "/pages/login.php",
 		"Camp" => "/pages/camp.php",
 		"Collections" => "/pages/collections.php",
 		// "Catalog" => "/pages/catalog.php",

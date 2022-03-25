@@ -1,41 +1,37 @@
-.fighters__list {
-	display: flex;
-	justify-content: space-between;
-	flex-wrap: wrap;
-}
+@import url('./vars.css');
 
-.fighter__card {
-	max-width: 180px;
-	padding: 20px;
-	border: 1px solid #333;
-	margin: 10px 5px;
-	min-height: 120px;
+.section-title {
+	color: var(--white);
 }
-.fighter__img {
-	width: 100%;
-}
-
 .inventory {
 	width: 100%;
-	display: flex;
-	justify-content: space-between;
-	flex-wrap: wrap;
-	height: 500px;
-	overflow-y: auto;
-	min-height: 200px;
 	background-color: #eee;
 }
 .inventory__item {
 	width: 200px;
 	height: 200px;
 	border: 1px solid #333;
-	margin-bottom: 40px;
+	margin-bottom: 20px;
 	background-color: #fff;
 	position: relative;
 }
 
 .inventory__item-img {
 	width: 100%;
+}
+.inventory__item-rarity {
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 40px;
+	height: 40px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-color: var(--grey);
+	color: var(--white);
+	padding: 4px 8px 8px 4px;
+	border-bottom-right-radius: 50%;
 }
 
 .inventory__creatures::after,
@@ -50,7 +46,7 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	background-color: #d44;
+	background-color: var(--red-color);
 	font-size: 10px;
 	line-height: 1;
 	color: #fff;
@@ -61,40 +57,68 @@
 
 .inventory__creatures::after{
 	content: 'c';
-	background-color: #4f4;
+	background-color: var(--green-color);
 }
 .inventory__defense::after{
 	content: 'd';
-	background-color: #33a;
+	background-color: var(--blue-color);
 }
 
 .camp {
 	display: flex;
 	flex-wrap: wrap;
-	justify-content: space-between;
+	justify-content: center;
+	align-items: flex-start;
 	padding-bottom: 100px;
+	color: var(--white);
+}
+
+.creatures__wrapper,
+.inventory__wrapper {
+	width: 450px;
 }
 
 .inventory__wrapper {
 	order: 3;
-	width: 32%;
 }
 .creatures__wrapper {
 	order: 1;
-	width: 32%;
 }
 
+.inventory,
 .creatures {
 	display: flex;
 	justify-content: space-between;
 	flex-wrap: wrap;
 	height: 500px;
+	min-height: 200px;
 	overflow-y: auto;
+	background-color: var(--dark);
+	padding: 10px 10px 0;
+}
+
+.creatures {
+
+}
+.inventory::-webkit-scrollbar,
+.creatures::-webkit-scrollbar {
+	width: 8px;
+}
+   
+.inventory::-webkit-scrollbar-track,
+.creatures::-webkit-scrollbar-track {
+	background-color: var(--dark);
+}
+   
+.inventory::-webkit-scrollbar-thumb,
+.creatures::-webkit-scrollbar-thumb {
+	background-color: var(--accent-color);
 }
 
 .creation__wrapper {
-	width: 32%;
+	width: 480px;
 	order: 2;
+	margin: 0 20px;
 }
 
 .creation {
@@ -127,7 +151,107 @@
 	height: 180px;
 }
 
+.creation__name-input {
+	display: block;
+	margin: 10px auto;
+}
+
 .creation__btn {
 	display: block;
 	margin: 0 auto;
+}
+
+.section-title {
+	margin-top: 60px;
+}
+
+.fighters__list {
+	display: flex;
+	max-width: 1440px;
+	width: 100%;
+	padding: 0 10px;
+	margin: 0 auto;
+	justify-content: space-between;
+	flex-wrap: wrap;
+}
+
+.fighter__card-wrapper {
+	margin: 30px 5px;
+}
+
+.fighter__card {
+	width: 300px;
+	height: 350px;
+	min-height: 120px;
+	color: var(--white);
+	background-color: var(--dark);
+	position: relative;
+	display: flex;
+	flex-direction: column;
+}
+.fighter__img {
+	width: 100%;
+	display: block;
+}
+.fighter__name {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	position: absolute;
+	bottom: 0px;
+	width: 170px;
+	height: 50px;
+	left: 50%;
+	transform: translate(-50%, 0);
+	font-size: 18px;
+	padding: 2px 4px;
+	text-align: center;
+}
+
+.fighter__countdown {
+	color: var(--white);
+}
+
+.fighter__card-footer {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	min-height: 50px;
+	margin-top: 5px;
+}
+.fighter__stat {
+	padding: 10px;
+	font-size: 18px;
+	position: absolute;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.fighter__prod {
+	left: 0;
+	bottom: 0;
+	background-color: var(--red-color);
+	height: 50px;
+	width: 50px;
+	border-top-right-radius: 50%;
+	padding: 5px 5px 0 0;
+}
+.fighter__dur {
+	right: 0;
+	bottom: 0;
+	background-color: var(--blue-color);
+	height: 50px;
+	width: 50px;
+	border-top-left-radius: 50%;
+	padding: 5px 0 0 5px;
+}
+.fighter__rarity {
+	left: 50%;
+	top: 0;
+	transform: translate(-50%, 0);
+	background-color: var(--green-color);
+	height: 40px;
+	width: 80px;
+	border-bottom-left-radius: 100%;
+	border-bottom-right-radius: 100%;
 }

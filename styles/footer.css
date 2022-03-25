@@ -1,5 +1,12 @@
 .footer {
+	margin-top: auto;
 	display: flex;
-	padding: 20px 10px;
-	background-color: #ddd;
+	padding: 20px 20px;
+	color: var(--white);
+	text-align: center;
+	background-color: var(--dark);
+}
+
+.footer h4 {
+	margin: 0 auto;
 }

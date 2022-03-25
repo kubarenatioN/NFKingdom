@@ -46,3 +46,9 @@ const createWarrior = (userId, name, items) => {
 			return newWarriorId
 		})
 }
+
+const setUserFavorites = (userId, favorites, token) => {
+	return usersAjax.setUserFavorites(userId, favorites, token)
+		.then(res => res.json())
+		.then(data => data)
+}

@@ -1,3 +1,5 @@
+@import url(vars.css);
+
 *, *::before, *::after {
 	box-sizing: border-box;
 }
@@ -5,6 +7,10 @@
 body {
 	margin: 0;
 	font-family: sans-serif;
+	background-color: var(--grey);
+	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
 }
 
 a {
@@ -22,4 +28,49 @@ ul {
 }
 .fighter__countdown.show {
 	display: block;
+}
+
+.btn {
+	background-color: var(--white);
+	color: var(--dark);
+	padding: 15px 30px;
+	border: none;
+	cursor: pointer;
+	font: unset;
+	font-size: 16px;
+	font-weight: 700;
+	font-family: sans-serif;
+	transition: .2s;
+}
+.btn:hover {
+	background-color: var(--accent-color);
+	color: var(--white);
+}
+.btn:disabled {
+	opacity: 0.5;
+	cursor: default;
+}
+.btn:disabled:hover {
+	background-color: var(--white);
+	color: var(--dark);
+	opacity: 0.5;
+	cursor: default;
+}
+
+.section-title {
+	text-align: center;
+}
+
+input {
+	background-color: transparent;
+	color: var(--white);
+	font-size: 14px;
+	font-family: sans-serif;
+	font: unset;
+	border: 2px solid var(--white);
+	padding: 10px 8px;
+	margin-bottom: 20px;
+	border-radius: 6px;
+	outline: none;
+	transition: .3s;
 }

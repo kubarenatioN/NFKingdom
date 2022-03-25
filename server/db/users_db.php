@@ -3,6 +3,37 @@
 	require_once $_SERVER['DOCUMENT_ROOT'].'/server/db/connection.php';
 	require_once $_SERVER['DOCUMENT_ROOT'].'/helpers/fighter_calculator.php';
 
+	function create_user($login, $password) {
+		$q = "insert into users (login, password) values ('$login', '$password')";
+		$qGetNewUser = "select LAST_INSERT_ID()";
+
+		$c = connect();
+		$inserted = $c->query($q);
+		$new_user = $c->query($qGetNewUser)->fetch_assoc()['LAST_INSERT_ID()'];
+		
+		$qCreateNewUserItems = "insert into users_items (id, user_id, item_id, item_type, item_unique_id) values 
+		(null, $new_user, 17, 'creatures', UUID()),
+		(null, $new_user, 6, 'weapons', UUID()),
+		(null, $new_user, 12, 'defense', UUID())";
+
+		$c->query($qCreateNewUserItems);
+
+		disconnect($c);
+
+		return ["inserted" => $inserted, "new_user" => $new_user];
+	}
+
+	function find_user($login, $password) {
+		$q = "select * from users where login = '$login' and password = '$password'";
+
+		$c = connect();
+		$found = $c->query($q)->fetch_assoc();
+		
+		disconnect($c);
+
+		return $found;
+	}
+
 	function get_user($id) {
 		$q = "select * from users where id = $id";
 		$c = connect();
@@ -92,6 +123,23 @@
 		disconnect($c);
 
 		return ["created" => $create, "warrior_id" => $warrior_id];
+	}
+
+	function set_favs($user_id, $favs, $token) {
+		$likes = $token['likes_count'];
+		$item_id = $token['id'];
+		$favs_str = implode("-", $favs);
+		$q = "update users set favorites = '$favs_str' where id = $user_id";
+		$qUpdateToken = "update items set likes_count = $likes where id = $item_id";
+
+		$c = connect();
+	
+		$data = $c->query($q);
+		$likes = $c->query($qUpdateToken);
+		
+		disconnect($c);
+
+		return [$data, $likes];
 	}
 
 ?>

@@ -22,10 +22,8 @@
 				<img 
 					class='inventory__item-img'
 					src='$img_url' />
-				<h4>item: #$item_id</h4>
-				<span>rarity: $rarity</span>
-				<span>price: $price$</span>
-				<span>type: $type</span>
+				<h4 class='inventory__item-id'>#$item_id</h4>
+				<span class='inventory__item-rarity'>$rarity</span>
 			</div>";
 		// $i++;
 	}

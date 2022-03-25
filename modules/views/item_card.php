@@ -15,15 +15,16 @@
 		$col_name = $collection['name'];
 		$html .=
 			"<a 
-				class='item__card'
+				class='galery__card'
 				href='/pages/item.php?c=$col_id&i=$id'>
 				<img 
-					class='item__card-img'
+					class='galery__card-img'
 					src='$img_url' 
 					alt='$col_name-$id'/>
-				<p>rarity: $rarity</p>
-				<p>collection: $col_name</p>
-				<p>price: $price$</p>
+				<div class='galery__card-footer'>
+					<p class='galery__card-rarity'>rarity: $rarity</p>
+					<p class='galery__card-price'>price: $price</p>
+				</div>
 			</a>";
 	}
 

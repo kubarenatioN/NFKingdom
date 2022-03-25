@@ -1,3 +1,72 @@
+.token {
+	display: flex;
+	justify-content: center;
+	padding-top: 100px;
+	color: var(--white);
+}
 .token__inner {
-	padding: 20px 40px;
+	width: 20%;
+	min-height: 512px;
+	padding: 20px 10px 20px 50px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: flex-start;
+	position: relative;
+}
+
+.token__inner p {
+	margin: 5px 0;
+}
+
+.token__purchase {
+	margin-top: 40px;
+}
+
+.message-label {
+	height: 40px;
+	margin: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-color: var(--error);
+	color: var(--white);
+	text-align: center;
+	transition: .3s;
+}
+.message-label.hidden {
+	opacity: 0;
+}
+
+.favorites__btn {
+	width: 50px;
+	height: 50px;
+	background-color: transparent;
+	border: none;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: cover;
+	cursor: pointer;
+	padding: 0;
+}
+.favorites__btn-add {
+	background-image: url(/assets/images/favorite_border_black_24dp.svg);
+}
+
+.favorites__btn-remove {
+	background-image: url(/assets/images/favorite_black_24dp.svg);
+}
+
+.favorites__btns {
+	position: absolute;
+	right: 0;
+	top: 0;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.favorites__btn:disabled {
+	opacity: 0.3;
+	cursor: default;
 }

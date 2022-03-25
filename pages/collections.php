@@ -7,13 +7,15 @@
 	<script src="/js/collections.ajax.js"></script>
     <script src="/js/collections.service.js"></script>
 
-	<h2>Explore Collections</h2>
+	<section class="collections section">
+		<h2 class="section-title">Explore NFT Collections</h2>
+	
+		<div id="collections" class="collections__inner">
+			<div class="collections__galery">
 
-	<div id="collections">
-		<div class="collections__galery">
-
+			</div>
 		</div>
-	</div>
+	</section>
 
 	<script>
 		const galery = document.querySelector('.collections__galery')

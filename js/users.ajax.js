@@ -83,4 +83,21 @@ const usersAjax = {
 			}
 		})
 	},
+
+	setUserFavorites: (userId, favorites, token) => {
+		const url = '/server/requests/set_favorites.php'
+		const payload = {
+			userId,
+			favorites,
+			token,
+		}
+		return fetch(url, {
+			method: 'POST',
+			body: JSON.stringify(payload),
+			headers: {
+				'Content-Type': 'application/json',
+			}
+		})
+	},
+
 }

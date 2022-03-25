@@ -1,0 +1,84 @@
+.login__wrapper {
+	margin: 0 auto;
+	min-height: 1px;
+    flex-grow: 1;
+	padding-bottom: 100px;
+	display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-tabs {
+	display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.tab-btns__wrapper {
+	display: flex;
+	justify-content: center;
+}
+.tabs__wrapper {
+	display: flex;
+} 
+
+.form {
+	display: none;
+	margin-top: 30px;
+}
+
+.form.active {
+	display: flex;
+	flex-direction: column;
+}
+
+.tab__btn {
+	padding: 20px 40px;
+	background-color: var(--dark);
+	color: var(--white);
+	cursor: pointer;
+	margin: 0;
+	transform: skewX(-20deg);
+}
+.tab__btn span {
+	display: inline-block;
+	transform: skewX(20deg);
+}
+.tab__btn.active {
+	background-color: var(--accent-color);
+}
+
+.form input {
+	background-color: transparent;
+	color: var(--white);
+	font-size: 14px;
+	font-family: sans-serif;
+	font: unset;
+	border: 2px solid var(--white);
+	padding: 10px 8px;
+	margin-bottom: 10px;
+	border-radius: 6px;
+	outline: none;
+	transition: .3s;
+}
+
+.form input:focus {
+	border-color: var(--accent-color);
+}
+
+.form-btn {
+	margin-top: 30px;
+}
+
+.input-error {
+	height: 20px;
+	font-size: 13px;
+}
+.error-msg {
+	color: var(--error);
+}
+
+.white-text {
+	color: var(--white);
+}

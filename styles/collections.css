@@ -1,3 +1,12 @@
+.collections {
+	max-width: 1000px;
+	width: 100%;
+	margin: 0 auto;
+	padding-top: 60px;
+	color: var(--white);
+}
+
+
 .collections__galery {
 	display: flex;
 	justify-content: space-between;
@@ -6,10 +15,75 @@
 
 .collection__item {
 	display: block;
-	max-width: 30%;
+	max-width: 270px;
 	width: 100%;
+	margin: 20px 10px;
 	padding: 20px;
-	border: 1px solid #333;
-	margin-bottom: 20px;
+	background-color: var(--dark);
+	display: flex;
+	flex-direction: column;
+	overflow: hidden;
+	position: relative;
+}
+.collection__item::before {
+	content: '';
+	position: absolute;
+	left: 0;
+	top: 0;
+	height: 100%;
+	width: 100%;
+	transform: translate(0, 100%);
+	background-color: var(--accent-color);
+	transition: .2s;
 }
 
+.collection__item:hover {
+	color: var(--white);
+}
+
+.collection__item:hover::before {
+	transform: translate(0, 0);
+}
+
+.collection__item-type,
+.collection__item-title {
+	position: relative;
+	transition: .2s;
+	margin: 0;
+}
+.collection__item-title {
+	font-size: 18px;
+}
+.collection__item-type {
+	padding-top: 10px;
+	margin-top: auto;
+	font-size: 14px;
+}
+
+.collection__item-title span,
+.collection__item-type span {
+	text-transform: capitalize;
+	font-weight: 700;
+}
+
+.collection__item::after {
+	content: '';
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 0px;
+	height: 0px;
+	border: 10px solid transparent;
+}
+.collection__creatures::after {
+	border-top-color: #008000;
+	border-left-color: #008000;
+}
+.collection__weapons::after {
+	border-top-color: #640300;
+	border-left-color: #640300;
+}
+.collection__defense::after {
+	border-top-color: #003686;
+	border-left-color: #003686;
+}

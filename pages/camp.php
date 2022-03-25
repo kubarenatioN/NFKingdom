@@ -6,10 +6,10 @@
 <? require_once $_SERVER['DOCUMENT_ROOT'].'/modules/header/header.php' ?>
 
     <?
-        $id = get_user_id();
-        header("User-id: $id");
-        var_dump($id);
-        if ($id == '') {
+        $user_id = get_user_id();
+        header("User-id: $user_id");
+        var_dump($user_id);
+        if ($user_id == '') {
             header("Location: login.php");
         }
     ?>
@@ -17,16 +17,13 @@
     <script src="/js/ajax.js"></script>
     <script src="/js/fights.service.js"></script>
 
-    <h3>Fighters for user #<span id="user-id-holder"></span></h3>
+    <h3 class="section-title">Your Fighters</h3>
 
     <div id="fighters" class="fighters__list">
 
     </div>
 
 	<script>
-		const userIdHeader = document.querySelector('#user-id-holder')
-        userIdHeader.innerHTML = userId
-
 		const camp = document.querySelector('#fighters')
         let warriors
         function loadFighters(userId) {
@@ -39,8 +36,12 @@
                 })
                 .then(fighters => fighters.json())
                 .then(fighters => {
+                    if (fighters.html == '') {
+                        camp.innerHTML = 'You have no fighters'
+                        throw new Error('no fighters for user');
+                    }
                     camp.innerHTML = fighters.html
-                    const fightButtons = camp.querySelectorAll('.fighter__card .start-fight__btn')
+                    const fightButtons = camp.querySelectorAll('.fighter__card-wrapper .start-fight__btn')
                     fightButtons.forEach((b, i) => {
                         b.addEventListener('click', () => {
                             startFight(warriors[i].id)
@@ -48,12 +49,15 @@
                     })
                 })
                 .then(() => {
-                    return ajax.getAllWarriorsFights()
+                    return ajax.getAllWarriorsFights(userId)
                 })
                 .then(res => res.json())
                 .then(warriors => warriors.forEach(w => {
                     setupCountdown(w)
                 }))
+                .catch(err => {
+                    console.error(err);
+                })
                 // .then(() => {
                 //     console.log(intervals)
                 // })
@@ -61,7 +65,7 @@
         loadFighters(userId)
     </script>
 
-    <h3>Camp</h3>
+    <h2 class="section-title">Camp</h2>
     
     <div id="camp" class="camp">
         <div class="creation__wrapper">
@@ -73,8 +77,8 @@
                 <div id="creation-slot-2" class="slot2 slot"></div>
                 <div id="creation-slot-3" class="slot3 slot"></div>
             </div>
-            <input id="warrior-name-input" type="text" placeholder="Имя"> 
-            <button class="creation__btn" disabled>Create</button>
+            <input id="warrior-name-input" class="creation__name-input" type="text" placeholder="Hero name"> 
+            <button class="creation__btn btn" disabled>Create</button>
         </div>
 
         <div class="creatures__wrapper">
@@ -175,7 +179,6 @@
             slotItems = clearSlottedItems(slotItems)
             createWarrior(userId, name, items)
                 .then(() => {
-                    console.log('then...');
                     loadFighters(userId)
                 })
             warriorName.disabled = false

@@ -65,8 +65,8 @@ const setupCountdown = (fighter) => {
 	if (!end_time) return
 	
 	const now = Math.floor(Date.now() / 1000)
-	const node = document.querySelector(`#w-${warrior_id}`)
-		.querySelector('.fighter__countdown')
+	const node = document.querySelector(`#w-${warrior_id}`).querySelector('.fighter__countdown')
+	
 	if (now > end_time) {
 		node.innerHTML = 'time passed, can collect'
 		finishFight(warrior_id)

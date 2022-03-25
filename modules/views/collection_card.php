@@ -7,13 +7,15 @@
 
 	foreach ($collections as $k => $collection) {
 		$name = $collection['name'];
+		$type = $collection['type'];
 		$id = $collection['id'];
 		
 		$html .=
 			"<a 
-				class='collection__item'
+				class='collection__item collection__$type'
 				href='/pages/galery.php?c=$id'>
-				$name
+				<p class='collection__item-title'><span>$name</span></p>
+				<p class='collection__item-type'>Type: <span>$type</span></p>
 			</a>";
 	}
 

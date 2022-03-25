@@ -1,4 +1,3 @@
-'use strict'
 const collectionsAjax = {
 	getAllCollections: () => {
 		const url = '/server/requests/get_collections.php'

@@ -2,29 +2,75 @@
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
+	padding: 20px 10px;
+	background-color: var(--dark);
+	color: var(--white);
+}
+.logo__text {
+	font-size: 36px;
+	font-weight: 700;
+	letter-spacing: -2px;
+	color: var(--accent-color);
 }
 .header__menu {
-	width: 100%;
 	display: flex;
 	justify-content: space-between;
 	list-style: none;
 }
+.header__menu-item {
+	margin-left: 30px;
+	font-size: 20px;
+	position: relative;
+}
+.header__menu-item::after {
+	content: '';
+	position: absolute;
+	bottom: -4px;
+	right: 0;
+	width: 0px;
+	height: 3px;
+	background-color: var(--accent-color);
+	transition: .2s;
+}
+.header__menu-item:hover::after {
+	left: 0;
+	width: 100%;
+}
+.header__menu-link:hover{
+	color: var(--accent-color);
+}
+.header__menu-link {
+	transition: .2s;
+	padding: 6px 2px;
+}
 
+.profile__wrapper {
+	display: flex;
+	align-items: center;
+}
 .profile {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	padding: 10px;
-	background-color: #ddd;
-	border-radius: 50%;
-	min-width: 80px;
-	width: 80px;
-	height: 80px;
+	padding: 10px 20px;
+	border: 1px solid var(--accent-color);
+	transition: .2s;
 }
-.profile__widget {
-	text-align: center;
+.profile:hover {
+	background-color: var(--accent-color);
 }
+
 .profile__widget-username,
 .profile__widget-account {
 	margin: 0;
+}
+
+.profile__widget-username {
+	font-weight: 700;
+	margin-right: 10px;
+}
+
+.profile__logout {
+	margin-left: 20px;
+	padding: 10px;
 }
